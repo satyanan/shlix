@@ -1,7 +1,10 @@
-const {app,dialog, BrowserWindow, Menu} = require('electron');
+const {app,dialog, BrowserWindow, Menu, remote, ipcMain} = require('electron');
 const path = require('path')
 const url = require('url')
-const remote = require('electron');
+// const remote = require('electron');
+// const ipcMain = require('electron');
+
+global.sharedObj = {localVideo: null}
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
     app.quit();
@@ -31,7 +34,7 @@ app.on("ready", function() {
               var properties = ['multiSelections', 'createDirectory', 'openFile'],
                   parentWindow = (process.platform == 'darwin') ? null : BrowserWindow.getFocusedWindow();
               
-              dialog.showOpenDialog(parentWindow, properties, function(f) {console.log("got a file: " + f)
+              dialog.showOpenDialog(parentWindow, properties, function(f) {global.sharedObj.localVideo=f; console.log("got a file: " + f)
               
             });            
             }
