@@ -19,5 +19,8 @@
   "devDependencies": {
     "electron": "^1.7.12",
     "electron-prebuilt": "^1.4.13"
+  },
+  "dependencies": {
+    "player.js": "^0.1.0"
   }
 }
