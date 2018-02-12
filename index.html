@@ -1,21 +1,17 @@
 <html>
 <head>
-	<!-- Flowplayer library -->
-	<!-- <script src="//releases.flowplayer.org/7.2.4/flowplayer.min.js"></script> -->
-	<!-- Flowplayer hlsjs engine (light) -->
-	<!-- <script src="//releases.flowplayer.org/hlsjs/flowplayer.hlsjs.light.min.js"></script> -->
 <title>shlix</title>
 </head>
 <body>
 <h1>Open a File with Electron</h1>
 <p>Reading a file right now</p>
 
-<video width="320" height="240" type='video/x-matroska' controls>
+<video width="320" height="240" type='video/x-matroska' id='localVideo' controls>
   <source src="movie.mp4" type="video/mp4">
   <source src="movie.ogg" type="video/ogg">
   Your browser does not support the video tag.
 </video>
-<button onclick="getlocalfile()">Click me</button>
+<button onclick="getlocalfile()">load video</button>
 <script>
     getlocalfile = () => {
       // const remote = require('electron');
@@ -27,10 +23,14 @@
       sources[0].src = f;
       sources[1].src = f;
       video.load();
-    }    
-    // remote.getGlobal('sharedObj').prop1 = 125;     
-    // var ipcRenderer = require('electron').ipcRenderer;     
-    // ipcRenderer.send('show-prop1');
+    } 
+    var localVidPlayer = document.getElementsByTagName('video')[0];
+    localVidPlayer.onpause = () => {
+      console.log("Video event: paused");
+    }
+    localVidPlayer.onplay = () => {
+      console.log("Video event: played");
+    }
  </script>
 
 </body>
